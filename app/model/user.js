@@ -5,7 +5,7 @@ module.exports = app => {
   const Schema = mongoose.Schema;
 
   const UserSchema = new Schema({
-    account: {
+    username: {
       type: String,
       required: true,
       minLength: 4,

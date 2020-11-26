@@ -25,14 +25,30 @@ module.exports = appInfo => {
     },
   };
 
+  config.jwt = {
+    secret: 'ichinoseeki', // 自定义 token 的加密条件字符串
+  };
+
   // use for cookie sign key, should change to your own and keep security
   config.keys = appInfo.name + '_ichinoseeki';
 
+  // config.passportLocal = {
+  //   key: 'l',
+  //   secret: 'm',
+  // };
+
   // add your middleware config here
   config.middleware = [
+    // 'throw', // 抛出业务错误，在框架级加载(app.js)
+    'auth', // token鉴权
     'responseData', // 格式化返回数据
-    'throw', // 抛出业务错误
   ];
+
+  // 鉴权路由配置
+  config.auth = {
+    enable: true,
+    ignore: [ '/login', '/user/new' ],
+  };
 
   config.mongoose = {
     client: {
@@ -54,7 +70,6 @@ module.exports = appInfo => {
           data: null,
           message: err.message,
         });
-        ctx.set('content-type', 'application/json');
         ctx.status = 200;
       } else
       // 拦截禁止访问错误
@@ -69,9 +84,16 @@ module.exports = appInfo => {
           data: null,
           message: err.message,
         });
-        ctx.set('content-type', 'application/json');
         ctx.status = 200;
+      } else {
+        ctx.body = JSON.stringify({
+          code: -1,
+          data: null,
+          message: err.message,
+        });
+        ctx.status = err.status;
       }
+      ctx.set('content-type', 'application/json');
     },
   };
 

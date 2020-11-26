@@ -7,6 +7,11 @@ class HomeController extends Controller {
     const { ctx } = this;
     ctx.body = 'hi, saisyo egg';
   }
+
+  async authCallback() {
+    const { ctx } = this;
+    ctx.body = 'authCallback';
+  }
 }
 
 module.exports = HomeController;
