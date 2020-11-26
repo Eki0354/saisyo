@@ -3,12 +3,12 @@
 const { Controller } = require('egg');
 
 class RoleController extends Controller {
-  async getById() {
-    this.ctx.body = await this.ctx.service.role.getRoleById(this.ctx.params._id);
+  async index() {
+    this.ctx.body = await this.ctx.service.role.getList();
   }
 
-  async getList() {
-    this.ctx.body = await this.ctx.service.role.getList();
+  async show() {
+    this.ctx.body = await this.ctx.service.role.getRoleById(this.ctx.params.id);
   }
 
   async create() {

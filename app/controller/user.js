@@ -3,12 +3,16 @@
 const { Controller } = require('egg');
 
 class UserController extends Controller {
-  async getById() {
-    this.ctx.body = await this.ctx.service.user.getUserById(this.ctx.params._id);
+  async index() {
+    this.ctx.body = await this.ctx.service.user.getList();
   }
 
-  async getList() {
-    this.ctx.body = await this.ctx.service.user.getList();
+  async show() {
+    this.ctx.body = await this.ctx.service.user.getUserById(this.ctx.params.id);
+  }
+
+  async edit() {
+    this.ctx.body = await this.ctx.service.user.modify(this.ctx.request.body);
   }
 
   async create() {
