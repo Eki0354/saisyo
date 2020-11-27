@@ -7,11 +7,17 @@ module.exports = () => {
   return async function csrf(ctx, next) {
     await next();
     if (ctx.status === 200) {
-      ctx.body = {
+      const baseBody = {
         code: 0,
-        data: ctx.body,
+        data: null,
         message: null,
       };
+      if (ctx.body && [ 'code', 'data', 'message' ].some(k => ctx.body[k])) {
+        ctx.body = Object.assign(baseBody, ctx.body);
+      } else {
+        baseBody.data = ctx.body;
+        ctx.body = baseBody;
+      }
     }
   };
 };

@@ -48,8 +48,6 @@ module.exports = app => {
   });
 
   app.passport.deserializeUser(async (ctx, user) => {
-    // 忽略验证白名单
-    if (app.config.auth.ignore.includes(ctx.url)) return;
     user = app.jwt.verify(user, app.config.jwt.secret);
     if (!user || !user._id) ctx.ej('TOKEN_INVALID');
     if (user.exp * 1000 < new Date().getTime() - 2000) ctx.ej('TOKEN_EXPIRED');

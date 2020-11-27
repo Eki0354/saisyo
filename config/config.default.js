@@ -47,7 +47,8 @@ module.exports = appInfo => {
   // 鉴权路由配置
   config.auth = {
     enable: true,
-    ignore: [ '/', '/login', '/user/new' ],
+    // 鉴权白名单
+    ignore: [ '/login', '/user/new' ],
   };
 
   config.mongoose = {

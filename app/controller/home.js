@@ -1,5 +1,7 @@
 'use strict';
 
+const { INFO_CODES } = require('../extend/application');
+
 const Controller = require('egg').Controller;
 
 class HomeController extends Controller {
@@ -8,9 +10,9 @@ class HomeController extends Controller {
     ctx.body = 'hi, saisyo egg';
   }
 
-  async authCallback() {
+  async getAuthUser() {
     const { ctx } = this;
-    ctx.body = 'authCallback';
+    ctx.body = this.ctx.user;
   }
 }
 

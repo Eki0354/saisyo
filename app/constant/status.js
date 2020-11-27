@@ -8,4 +8,6 @@ module.exports = {
   BIZ_ERROR: 444, // 业务错误拦截状态码
   DUPLICATED_PERMISSION_NAME: 'W002001', // 已存在的权限名称
   DUPLICATED_ROLE_NAME: 'W003001', // 已存在的角色名称
+
+  LOGIN_SUCCESS: 'S001001', // 登录成功
 };
